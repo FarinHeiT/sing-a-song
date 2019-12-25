@@ -5,7 +5,8 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
-	<script src="{{ url_for('static', filename='main.js') }}"></script>
+    <script src="{{ url_for('static', filename='lyrics.js') }}"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
 </head>
 <body>
 	
@@ -17,7 +18,7 @@
 		</div>
 
 		<div class="bg-light">
-			<div class="d-flex justify-content-center">
+			<div class="d-flex justify-content-around">
 				<img class='santa' src="http://pngimg.com/uploads/santa_claus/santa_claus_PNG38508.png" alt="">
 				<pre class='text-center'>No more champagne
 And the fireworks are through
