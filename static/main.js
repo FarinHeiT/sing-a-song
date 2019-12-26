@@ -8,8 +8,7 @@
 
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const recognition = new SpeechRecognition();
-  // Return each phrase\word
-  // recognition.interimResults = true;
+
   recognition.lang = 'en-US';
 
   function startSong () {
@@ -45,12 +44,19 @@
     })
       .then(function (response) {
         result = response.data.percentage;
+        showResult();
       })
   }
 
 
+  function showResult () {
+    const resultField = document.querySelector('#result');
+    resultField.innerHTML = result;
+    $(".Modal").modal();
+  }
+
+
   startButton.addEventListener('click', () => startSong());
-  // startButton.addEventListener('click', () => recognition.start(), {once : true});
   restartButton.addEventListener('click', () => {
     audio.currentTime = 0;
     userLyrics = '';
