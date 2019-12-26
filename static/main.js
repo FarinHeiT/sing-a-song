@@ -1,9 +1,10 @@
  window.addEventListener('load', function () {
-    const audio = document.getElementsByTagName('audio')[0];
+  const audio = document.getElementsByTagName('audio')[0];
   const startButton = document.querySelector('.start');
   const restartButton = document.querySelector('.restart');
   const lyrics = document.getElementsByTagName('pre')[0];
   let userLyrics = '';
+  let result;
 
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const recognition = new SpeechRecognition();
@@ -38,6 +39,15 @@
     }
   }
 
+  function sendLyrics (data) {
+    axios.post('/submit_song', {
+      data,
+    })
+      .then(function (response) {
+        result = response.data.percentage;
+      })
+  }
+
 
   startButton.addEventListener('click', () => startSong());
   // startButton.addEventListener('click', () => recognition.start(), {once : true});
@@ -62,7 +72,10 @@
 
   recognition.addEventListener('end', () => !audio.paused ? recognition.start() : '');
 
-  audio.addEventListener('ended', alert(1));
+  audio.addEventListener('ended', () => {
+    sendLyrics(userLyrics);
+    audio.currentTime = 0;
+  });
 
   setInterval(() => {
     syncLyrics();
