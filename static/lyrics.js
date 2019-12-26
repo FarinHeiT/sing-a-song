@@ -25,4 +25,14 @@ Oh yes, man is a fool
 And he thinks he'll be okay
 Dragging on, feet of clay
 Never knowing he's astray
-Keeps on going anyway`];
+Keeps on going anyway`,
+
+`Seems to me now
+That the dreams we had before
+Are all dead, nothing more
+Than confetti on the floor
+It's the end of a decade
+In another ten years time
+Who can say what we'll find
+What lies waiting down the line
+In the end of eighty-nine`];

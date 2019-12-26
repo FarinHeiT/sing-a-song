@@ -1,5 +1,5 @@
  window.addEventListener('load', function () {
-  const audio = document.getElementsByTagName('audio')[0];
+    const audio = document.getElementsByTagName('audio')[0];
   const startButton = document.querySelector('.start');
   const restartButton = document.querySelector('.restart');
   const lyrics = document.getElementsByTagName('pre')[0];
@@ -22,28 +22,33 @@
     }
   }
 
+  function syncLyrics () {
+    if (audio.currentTime <= 43) {
+      lyrics.innerHTML = lyricsList[0];
+    } else if (audio.currentTime <= 81) {
+      lyrics.innerHTML = lyricsList[1];
+    } else if (audio.currentTime <= 116){
+      lyrics.innerHTML = lyricsList[2];
+    } else if (audio.currentTime <= 168){
+      lyrics.innerHTML = lyricsList[1];
+    } else if (audio.currentTime <= 204){
+      lyrics.innerHTML = lyricsList[3];
+    } else {
+      lyrics.innerHTML = lyricsList[1];
+    }
+  }
+
 
   startButton.addEventListener('click', () => startSong());
   // startButton.addEventListener('click', () => recognition.start(), {once : true});
   restartButton.addEventListener('click', () => {
     audio.currentTime = 0;
     userLyrics = '';
-//     lyrics.innerHTML = `No more champagne
-// And the fireworks are through
-// Here we are, me and you
-// Feeling lost and feeling blue
-// It's the end of the party
-// And the morning seems so grey
-// So unlike yesterday
-// Now's the time for us to say`
   });
 
 
   recognition.addEventListener('result', e => {
-
     userLyrics += e.results[0][0].transcript;
-    console.log(userLyrics)
-
   });
 
   audio.addEventListener('pause', () => {
@@ -57,15 +62,10 @@
 
   recognition.addEventListener('end', () => !audio.paused ? recognition.start() : '');
 
-  setInterval(() => {
+  audio.addEventListener('ended', alert(1));
 
-    if (audio.currentTime <= 43) {
-      lyrics.innerHTML = lyricsList[0];
-    } else if (audio.currentTime <= 81) {
-      lyrics.innerHTML = lyricsList[1];
-    } else {
-      lyrics.innerHTML = lyricsList[2];
-    }
+  setInterval(() => {
+    syncLyrics();
   }, 1000);
 
 });
